@@ -15,6 +15,7 @@ export const DEMO_USERS: User[] = [
     id: 'usr-admin',
     name: 'System Admin',
     email: 'admin@hospital.com',
+    password: 'Admin@1234',
     role: 'ADMIN',
     department: 'Administration',
     avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
@@ -23,6 +24,7 @@ export const DEMO_USERS: User[] = [
     id: 'usr-doc1',
     name: 'Dr. Ahmed Khan',
     email: 'doctor@hospital.com',
+    password: 'Doctor@1234',
     role: 'DOCTOR',
     department: 'General Medicine',
     avatarUrl: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80'
@@ -31,6 +33,7 @@ export const DEMO_USERS: User[] = [
     id: 'usr-front',
     name: 'Saima Reception',
     email: 'frontdesk@hospital.com',
+    password: 'Desk@1234',
     role: 'FRONT_DESK',
     department: 'Reception',
     avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80'
@@ -39,6 +42,7 @@ export const DEMO_USERS: User[] = [
     id: 'usr-nurse',
     name: 'Nurse Fatima',
     email: 'nurse@hospital.com',
+    password: 'Nurse@1234',
     role: 'NURSE',
     department: 'Inpatient Nursing',
     avatarUrl: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&auto=format&fit=crop&q=80'
@@ -47,6 +51,7 @@ export const DEMO_USERS: User[] = [
     id: 'usr-pharma',
     name: 'Bilal Pharmacist',
     email: 'pharmacist@hospital.com',
+    password: 'Pharma@1234',
     role: 'PHARMACIST',
     department: 'Pharmacy',
     avatarUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
@@ -55,6 +60,7 @@ export const DEMO_USERS: User[] = [
     id: 'usr-lab',
     name: 'Tariq Lab Tech',
     email: 'lab@hospital.com',
+    password: 'Lab@1234',
     role: 'LAB_STAFF',
     department: 'Pathology & Lab',
     avatarUrl: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80'
@@ -63,6 +69,7 @@ export const DEMO_USERS: User[] = [
     id: 'usr-accountant',
     name: 'Zainab Accountant',
     email: 'accountant@hospital.com',
+    password: 'Account@1234',
     role: 'ACCOUNTANT',
     department: 'Billing & Finance',
     avatarUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80'
@@ -71,6 +78,7 @@ export const DEMO_USERS: User[] = [
     id: 'usr-hr',
     name: 'Rashid HR Officer',
     email: 'hr@hospital.com',
+    password: 'HR@1234',
     role: 'HR',
     department: 'Human Resources',
     avatarUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'

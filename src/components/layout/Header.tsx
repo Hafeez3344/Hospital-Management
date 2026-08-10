@@ -2,17 +2,18 @@
 
 import React, { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
+import { useSidebar } from '@/lib/sidebar-context';
 import { UserRole } from '@/lib/types';
+import { useRouter } from 'next/navigation';
 import { 
   Building2, 
   Bell, 
   Search, 
   ChevronDown, 
-  ShieldAlert, 
   LogOut,
-  User as UserIcon,
   Clock,
-  Sparkles
+  Sparkles,
+  Menu
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -40,8 +41,12 @@ const ALL_ROLES: { role: UserRole; label: string; desc: string }[] = [
 
 export const Header: React.FC = () => {
   const { currentUser, currentRole, switchRole, logout } = useAuth();
+  const { toggle: toggleSidebar } = useSidebar();
+  const router = useRouter();
   const [roleMenuOpen, setRoleMenuOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+
+  if (!currentUser) return null;
 
   const roleStyle = ROLE_COLORS[currentRole] || ROLE_COLORS.ADMIN;
 
@@ -49,8 +54,17 @@ export const Header: React.FC = () => {
     <header className="sticky top-0 z-30 bg-white border-b border-slate-200 shadow-sm">
       <div className="flex items-center justify-between h-16 px-4 md:px-6">
         
-        {/* Left Section: Logo & Hospital Title */}
-        <div className="flex items-center gap-4">
+        {/* Left Section: Hamburger (mobile) + Logo & Hospital Title */}
+        <div className="flex items-center gap-3">
+          {/* Mobile hamburger */}
+          <button
+            onClick={toggleSidebar}
+            className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
+            aria-label="Open navigation menu"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+
           <Link href="/admin" className="flex items-center gap-2.5 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-cyan-500 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
               <Building2 className="w-6 h-6" />
@@ -58,11 +72,11 @@ export const Header: React.FC = () => {
             <div>
               <h1 className="font-bold text-slate-900 text-lg leading-tight tracking-tight flex items-center gap-2">
                 CarePulse
-                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-teal-50 text-teal-700 border border-teal-200">
+                <span className="hidden sm:inline text-xs font-semibold px-2 py-0.5 rounded bg-teal-50 text-teal-700 border border-teal-200">
                   Hospital
                 </span>
               </h1>
-              <p className="text-[11px] text-slate-500 font-medium">Healthcare Management System</p>
+              <p className="hidden sm:block text-[11px] text-slate-500 font-medium">Healthcare Management System</p>
             </div>
           </Link>
         </div>
@@ -170,31 +184,23 @@ export const Header: React.FC = () => {
                 onMouseLeave={() => setProfileMenuOpen(false)}
               >
                 <div className="px-4 py-2 border-b border-slate-100">
-                  <p className="text-xs font-bold text-slate-900">{currentUser.name}</p>
+                  <p className="text-xs text-slate-900">{currentUser.name}</p>
                   <p className="text-xs text-slate-500 truncate">{currentUser.email}</p>
-                  <span className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 rounded uppercase">
+                  <span className="inline-block mt-1 text-[10px] px-2 py-0.5 bg-slate-100 text-slate-700 rounded uppercase">
                     {currentUser.role}
                   </span>
                 </div>
-                
-                <Link
-                  href="/login"
-                  className="w-full text-left px-4 py-2.5 text-xs text-slate-700 hover:bg-slate-50 flex items-center gap-2 transition-colors"
-                  onClick={() => setProfileMenuOpen(false)}
-                >
-                  <UserIcon className="w-4 h-4 text-slate-400" />
-                  <span>Switch Demo User / Login</span>
-                </Link>
 
                 <button
                   onClick={() => {
                     logout();
                     setProfileMenuOpen(false);
+                    router.push('/login');
                   }}
                   className="w-full text-left px-4 py-2.5 text-xs text-rose-600 hover:bg-rose-50 flex items-center gap-2 transition-colors"
                 >
                   <LogOut className="w-4 h-4 text-rose-500" />
-                  <span>Logout Demo Session</span>
+                  <span>Sign Out</span>
                 </button>
               </div>
             )}
