@@ -1,12 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { APPOINTMENTS, DOCTORS } from '@/lib/mock-data';
+import { BookAppointmentModal } from '@/components/ui/BookAppointmentModal';
 import { Calendar, Clock, Plus, Filter, UserCheck, Stethoscope } from 'lucide-react';
 
 export default function AppointmentsPage() {
+  const [apptOpen, setApptOpen] = useState(false);
+  const [defaultPatient, setDefaultPatient] = useState('');
   return (
-    <div className="space-y-6 pb-12">
+    <>
+      <div className="space-y-6 pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
@@ -23,7 +27,10 @@ export default function AppointmentsPage() {
           </p>
         </div>
 
-        <button className="px-4 py-2 text-xs font-semibold bg-teal-600 hover:bg-teal-700 text-white rounded-xl transition-colors shadow-md shadow-teal-900/20 flex items-center gap-1.5 self-start sm:self-center">
+        <button
+          onClick={() => { setDefaultPatient(''); setApptOpen(true); }}
+          className="px-4 py-2 text-xs bg-teal-600 hover:bg-teal-700 text-white rounded-xl transition-colors shadow-md shadow-teal-900/20 flex items-center gap-1.5 self-start sm:self-center"
+        >
           <Plus className="w-4 h-4" />
           <span>Book OPD Appointment</span>
         </button>
@@ -95,8 +102,11 @@ export default function AppointmentsPage() {
                     </span>
                   </td>
                   <td className="py-3.5 px-4 text-right">
-                    <button className="px-3 py-1 text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 rounded-lg shadow-sm">
-                      Start Consultation
+                    <button
+                      onClick={() => { setDefaultPatient(apt.patientName); setApptOpen(true); }}
+                      className="px-3 py-1 text-xs text-white bg-teal-600 hover:bg-teal-700 rounded-lg shadow-sm"
+                    >
+                      Book / Consult
                     </button>
                   </td>
                 </tr>
@@ -107,5 +117,12 @@ export default function AppointmentsPage() {
       </div>
 
     </div>
+
+    <BookAppointmentModal
+      isOpen={apptOpen}
+      onClose={() => setApptOpen(false)}
+      defaultPatientName={defaultPatient}
+    />
+    </>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { DASHBOARD_METRICS } from '@/lib/mock-data';
 import { KPICard } from '@/components/dashboard/KPICard';
@@ -14,6 +14,8 @@ import { AppointmentsTable } from '@/components/dashboard/AppointmentsTable';
 import { RecentPatients } from '@/components/dashboard/RecentPatients';
 import { IPDSummary } from '@/components/dashboard/IPDSummary';
 import { PharmacyAlerts } from '@/components/dashboard/PharmacyAlerts';
+import { BookAppointmentModal } from '@/components/ui/BookAppointmentModal';
+import { NewPatientModal } from '@/components/ui/NewPatientModal';
 import {
   Users,
   Calendar,
@@ -22,16 +24,13 @@ import {
   Pill,
   TestTube,
   DollarSign,
-  Building2,
-  Sparkles,
-  TrendingUp,
-  Download,
   Plus
 } from 'lucide-react';
-import Link from 'next/link';
 
 export default function AdminDashboardPage() {
   const { currentUser, currentRole } = useAuth();
+  const [apptOpen, setApptOpen] = useState(false);
+  const [patientOpen, setPatientOpen] = useState(false);
 
   return (
     <div className="space-y-6 pb-12">
@@ -40,35 +39,35 @@ export default function AdminDashboardPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-200 uppercase">
+            <span className="text-[11px] px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-200 uppercase">
               {currentRole.replace('_', ' ')} OVERVIEW
             </span>
-            <span className="text-slate-400 text-xs">• Live Demo Dashboard</span>
+            <span className="text-slate-400 text-[11px]">• Live Demo Dashboard</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight mt-1">
+          <h2 className="text-lg text-slate-900 tracking-tight mt-1">
             Welcome back, {currentUser?.name}!
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-[11px] text-slate-500 mt-0.5">
             Here is the real-time operational overview of CarePulse Hospital today.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <Link 
-            href="/appointments"
-            className="px-3.5 py-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors flex items-center gap-1.5"
+          <button
+            onClick={() => setApptOpen(true)}
+            className="px-3.5 py-2 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors flex items-center gap-1.5"
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Book Appointment</span>
-          </Link>
+          </button>
 
-          <Link
-            href="/patients"
-            className="px-4 py-2 text-xs font-semibold bg-teal-600 hover:bg-teal-700 text-white rounded-xl transition-colors shadow-md shadow-teal-900/20 flex items-center gap-1.5"
+          <button
+            onClick={() => setPatientOpen(true)}
+            className="px-4 py-2 text-xs bg-teal-600 hover:bg-teal-700 text-white rounded-xl transition-colors shadow-md shadow-teal-900/20 flex items-center gap-1.5"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>New Patient</span>
-          </Link>
+          </button>
         </div>
       </div>
 
@@ -189,6 +188,10 @@ export default function AdminDashboardPage() {
         <IPDSummary />
         <PharmacyAlerts />
       </div>
+
+      {/* Modals */}
+      <BookAppointmentModal isOpen={apptOpen} onClose={() => setApptOpen(false)} />
+      <NewPatientModal isOpen={patientOpen} onClose={() => setPatientOpen(false)} />
 
     </div>
   );

@@ -210,19 +210,19 @@ export const Sidebar: React.FC = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-normal transition-all group ${
+              className={`flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg text-xs font-normal transition-all group ${
                 isActive
                   ? 'bg-teal-600 text-white shadow-md shadow-teal-900/30'
                   : 'text-slate-300 hover:bg-slate-800 hover:text-white'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <Icon className={`w-4 h-4 transition-transform group-hover:scale-110 ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-teal-400'}`} />
-                <span>{item.title}</span>
+              <div className="flex items-center gap-3 min-w-0">
+                <Icon className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-teal-400'}`} />
+                <span className="truncate">{item.title}</span>
               </div>
               {item.badge && (
                 <span
-                  className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
+                  className={`text-[10px] font-medium px-2 py-0.5 rounded-full whitespace-nowrap shrink-0 ${
                     isActive
                       ? 'bg-white/20 text-white'
                       : 'bg-slate-800 text-teal-400 border border-slate-700'
@@ -237,9 +237,8 @@ export const Sidebar: React.FC = () => {
       </div>
 
       {/* Sidebar Footer */}
-      <div className="p-4 border-t border-slate-800 bg-slate-950/40 text-[11px] text-slate-400 flex items-center justify-between">
+      <div className="p-4 border-t border-slate-800 bg-slate-950/40 text-[11px] text-slate-400">
         <span>CarePulse Hospital</span>
-        <span className="text-teal-400 font-medium">Demo Ready</span>
       </div>
     </aside>
   );

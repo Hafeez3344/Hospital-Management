@@ -68,7 +68,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col lg:flex-row relative overflow-hidden">
+    <div className="min-h-screen bg-slate-950 flex flex-col lg:flex-row relative">
 
       {/* Decorative glows */}
       <div className="absolute -top-60 -left-60 w-[500px] h-[500px] bg-teal-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -76,7 +76,7 @@ export default function LoginPage() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-slate-800/20 rounded-full blur-3xl pointer-events-none" />
 
       {/* ── LEFT PANEL: login form ── */}
-      <div className="flex-1 flex flex-col justify-center items-center p-8 lg:p-14 z-10">
+      <div className="flex-1 flex flex-col justify-center items-center px-5 py-10 sm:p-8 lg:p-14 z-10">
         <div className="w-full max-w-md">
 
           {/* Logo */}
@@ -176,6 +176,30 @@ export default function LoginPage() {
           <p className="text-center text-xs text-slate-600 mt-8">
             CarePulse HMS • Demo Prototype &nbsp;·&nbsp; All data is fictional
           </p>
+
+          {/* Mobile-only quick accounts */}
+          <div className="lg:hidden mt-8 border-t border-slate-800 pt-6">
+            <p className="text-xs text-slate-500 mb-3 text-center">Tap an account to auto-fill</p>
+            <div className="grid grid-cols-2 gap-2">
+              {CREDENTIALS_HINT.map((c) => {
+                const Icon = c.icon;
+                return (
+                  <button
+                    key={c.role}
+                    type="button"
+                    onClick={() => fillCredentials(c.email, c.password)}
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-800/70 hover:bg-slate-800 border border-slate-700/50 hover:border-teal-600/40 transition-all text-left"
+                  >
+                    <Icon className={`w-4 h-4 flex-shrink-0 ${c.color}`} />
+                    <div className="min-w-0">
+                      <p className="text-xs text-slate-300 truncate leading-tight">{c.role}</p>
+                      <p className="text-[10px] text-slate-500 truncate">{c.password}</p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
 

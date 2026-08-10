@@ -3,12 +3,17 @@
 import React, { useState } from 'react';
 import { PATIENTS } from '@/lib/mock-data';
 import { Patient, Gender, PatientStatus } from '@/lib/types';
+import { BookAppointmentModal } from '@/components/ui/BookAppointmentModal';
+import { NewPatientModal } from '@/components/ui/NewPatientModal';
 import { Search, Filter, Plus, Users, Eye, Edit, Phone, Mail, Calendar } from 'lucide-react';
 
 export default function PatientsPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
   const [genderFilter, setGenderFilter] = useState<string>('ALL');
+  const [patientOpen, setPatientOpen] = useState(false);
+  const [apptOpen, setApptOpen] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState('');
 
   const filteredPatients = PATIENTS.filter((patient) => {
     const matchesSearch =
@@ -23,7 +28,8 @@ export default function PatientsPage() {
   });
 
   return (
-    <div className="space-y-6 pb-12">
+    <>
+      <div className="space-y-6 pb-12">
       
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
@@ -42,7 +48,10 @@ export default function PatientsPage() {
           </p>
         </div>
 
-        <button className="px-4 py-2 text-xs font-semibold bg-teal-600 hover:bg-teal-700 text-white rounded-xl transition-colors shadow-md shadow-teal-900/20 flex items-center gap-1.5 self-start sm:self-center">
+        <button
+          onClick={() => setPatientOpen(true)}
+          className="px-4 py-2 text-xs bg-teal-600 hover:bg-teal-700 text-white rounded-xl transition-colors shadow-md shadow-teal-900/20 flex items-center gap-1.5 self-start sm:self-center"
+        >
           <Plus className="w-4 h-4" />
           <span>Register New Patient</span>
         </button>
@@ -162,10 +171,13 @@ export default function PatientsPage() {
                   </td>
 
                   <td className="py-3.5 px-4 text-right space-x-1">
-                    <button className="px-2.5 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100 rounded-lg transition-colors border border-slate-200">
+                    <button className="px-2.5 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded-lg transition-colors border border-slate-200">
                       Profile
                     </button>
-                    <button className="px-2.5 py-1 text-xs font-semibold text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors border border-teal-200">
+                    <button
+                      onClick={() => { setSelectedPatient(patient.name); setApptOpen(true); }}
+                      className="px-2.5 py-1 text-xs text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors border border-teal-200"
+                    >
                       Book Apt
                     </button>
                   </td>
@@ -190,5 +202,13 @@ export default function PatientsPage() {
       </div>
 
     </div>
+
+    <NewPatientModal isOpen={patientOpen} onClose={() => setPatientOpen(false)} />
+    <BookAppointmentModal
+      isOpen={apptOpen}
+      onClose={() => setApptOpen(false)}
+      defaultPatientName={selectedPatient}
+    />
+    </>
   );
 }
