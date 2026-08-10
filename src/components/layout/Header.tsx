@@ -160,20 +160,20 @@ export const Header: React.FC = () => {
               onClick={() => setProfileMenuOpen(!profileMenuOpen)}
               className="flex items-center gap-2.5 p-1 rounded-lg hover:bg-slate-100 transition-colors"
             >
-              {currentUser.avatarUrl ? (
+              {currentUser?.avatarUrl ? (
                 <img
                   src={currentUser.avatarUrl}
-                  alt={currentUser.name}
+                  alt={currentUser?.name}
                   className="w-9 h-9 rounded-full object-cover ring-2 ring-slate-200"
                 />
               ) : (
                 <div className="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold text-sm">
-                  {currentUser.name[0]}
+                  {currentUser?.name?.[0]}
                 </div>
               )}
               <div className="hidden md:block text-left">
-                <div className="text-xs font-semibold text-slate-800 leading-tight">{currentUser.name}</div>
-                <div className="text-[10px] text-slate-500 font-medium">{currentUser.department}</div>
+                <div className="text-xs font-semibold text-slate-800 leading-tight">{currentUser?.name}</div>
+                <div className="text-[10px] text-slate-500 font-medium">{currentUser?.department}</div>
               </div>
               <ChevronDown className="w-4 h-4 text-slate-400" />
             </button>
@@ -184,10 +184,10 @@ export const Header: React.FC = () => {
                 onMouseLeave={() => setProfileMenuOpen(false)}
               >
                 <div className="px-4 py-2 border-b border-slate-100">
-                  <p className="text-xs text-slate-900">{currentUser.name}</p>
-                  <p className="text-xs text-slate-500 truncate">{currentUser.email}</p>
+                  <p className="text-xs text-slate-900">{currentUser?.name}</p>
+                  <p className="text-xs text-slate-500 truncate">{currentUser?.email}</p>
                   <span className="inline-block mt-1 text-[10px] px-2 py-0.5 bg-slate-100 text-slate-700 rounded uppercase">
-                    {currentUser.role}
+                    {currentUser?.role}
                   </span>
                 </div>
 

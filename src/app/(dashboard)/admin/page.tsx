@@ -46,7 +46,7 @@ export default function AdminDashboardPage() {
             <span className="text-slate-400 text-xs">• Live Demo Dashboard</span>
           </div>
           <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight mt-1">
-            Welcome back, {currentUser.name}!
+            Welcome back, {currentUser?.name}!
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">
             Here is the real-time operational overview of CarePulse Hospital today.
