@@ -41,12 +41,12 @@ export const PatientVisitsChart: React.FC = () => {
           <AreaChart data={PATIENT_VISITS_DATA} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="colorOpd" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0D9488" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#0D9488" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#0D9488" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#0D9488" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="colorIpd" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0284C7" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#0284C7" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#0284C7" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#0284C7" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
